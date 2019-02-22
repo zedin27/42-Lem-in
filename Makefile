@@ -6,7 +6,7 @@
 #    By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 17:44:49 by ztisnes           #+#    #+#              #
-#    Updated: 2019/02/21 17:38:31 by ztisnes          ###   ########.fr        #
+#    Updated: 2019/02/21 17:42:39 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,7 @@ SRCFILES	= $(wildcard *.c)
 SRCDIR		= src/
 OBJS		= $(patsubst %, %.o, $(addprefix $(SRCDIR), $(SRCFILES)))
 
-SRCFILES	= main \
-			bfs
+SRCFILES	= bfs
 
 ################################################################################
 # RULES                                                                        #
