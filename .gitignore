@@ -2,7 +2,7 @@
 *.d
 .DS_*
 ._D*
-._.*
+._*
 
 # Object files
 *.o
