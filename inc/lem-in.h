@@ -9,11 +9,18 @@
 ** Node
 */
 
+//zt todo
 typedef struct		s_node
 {
 	struct s_node	*next;
 	int				vertex;
 }					t_node;
+
+// struct			s_list
+// {
+// 	int		info;
+// 	struct s_list *next;
+// } *ptr=NULL, *temp=NULL, *rear=NULL, *front=NULL;
 
 /*
 ** Graph
