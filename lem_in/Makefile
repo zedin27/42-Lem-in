@@ -1,0 +1,58 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
+#    Updated: 2019/02/23 17:04:43 by tcherret         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME = lem_in
+
+NAMELIB = ./libft/libftprintf.a
+
+CC = @gcc -Wall -Wextra -Werror -g
+
+##CFLAGS =-Wall -Wextra -Werror
+
+SRCS = srcs/lem_in.c\
+	   srcs/parsing0.c\
+	   srcs/parsing1.c\
+	   srcs/ft_realloc_room.c\
+	   srcs/get_option.c\
+
+INCS = lem_in.h
+
+LIBDIR = ./libft/
+INCDIR = ./includes/
+
+OBJ = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+		@echo "\033[33mCompiling...\033[0m"
+		@make -C $(LIBDIR)
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NAMELIB)
+		@echo "\033[32m$(NAME) compiled ✔ ✔ ✔ ✔\033[0m"
+
+objs/%.o : srcs/%.c
+	@mkdir -p $(@D)
+	@$(CC) -c $(CFLAGS) $< -I./includes -o $@
+
+clean :
+		@rm -rf $(OBJ) objs
+		@make -C $(LIBDIR) clean
+		@echo "\033[31mObjects deleted ✕\033[0m"
+
+fclean : clean
+	@rm -f $(NAME)
+	@make -C $(LIBDIR) fclean
+	@echo "\033[31m$(NAME) deleted ✕\033[0m"
+
+re : fclean all
+
+.PHONY : all clean fclean re
