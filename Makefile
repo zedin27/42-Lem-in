@@ -6,7 +6,7 @@
 #    By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 17:44:49 by ztisnes           #+#    #+#              #
-#    Updated: 2019/02/21 17:38:31 by ztisnes          ###   ########.fr        #
+#    Updated: 2019/02/24 20:53:15 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ PURPLE = \033[0;35m
 ################################################################################
 
 CC			= gcc
-FLAGS		= -Ofast -Wextra -Wall -Werror
+FLAGS		= -g -Ofast -Wextra -Wall -Werror
 LIB			= libft.a
 NAME		= lem-in
 LINK		= -L libft/ -l ft
@@ -37,7 +37,8 @@ SRCDIR		= src/
 OBJS		= $(patsubst %, %.o, $(addprefix $(SRCDIR), $(SRCFILES)))
 
 SRCFILES	= main \
-			bfs
+			test_bfs2 \
+
 
 ################################################################################
 # RULES                                                                        #

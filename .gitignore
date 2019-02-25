@@ -3,6 +3,7 @@
 .DS_*
 ._D*
 ._*
+*.out
 
 # Object files
 *.o
