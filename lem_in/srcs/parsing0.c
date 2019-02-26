@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:52:28 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 10:42:04 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/25 20:16:59 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,19 @@ int				is_room_info(char *str, t_farm *farm, int i)
 		j++;
 	if (j == 3 && ft_atoi(tab[1]) >= 0 && ft_atoi(tab[2]) >= 0)
 	{
-		if (check_name(tab[0], *farm, i - 1) == 1)
+		if (check_name(tab[0], farm, i) == 1)
 			return (-1);
 		farm->room[i].name = ft_strdup(tab[0]); // to free
 		farm->room[i].x = ft_atoi(tab[1]);
 		farm->room[i].y = ft_atoi(tab[2]);
 		farm->room[i].ant = 0;
+		farm->room[i].visited = 0;
 		if ((*farm).init_start == 1)
 		{
 			farm->room[i].start = 1;
 			farm->room[i].ant = farm->total;
 			farm->init_start = 2;
+			farm->room[i].visited = 1;
 		}
 		else
 			farm->room[i].start = 0;
@@ -88,6 +90,13 @@ int				is_nb_info(char *str)
 		return (1);
 	}
 	free_tab(tab);
+	return (0);
+}
+
+int				is_comment1(char *str)
+{
+	if (str[0] == '#' && str[1] == '#')
+		return (1);
 	return (0);
 }
 

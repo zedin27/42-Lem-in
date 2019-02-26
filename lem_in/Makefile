@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/23 17:04:43 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/25 20:31:54 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem_in
 
 NAMELIB = ./libft/libftprintf.a
 
-CC = @gcc -Wall -Wextra -Werror -g
+CC = @gcc -fsanitize=address -Wall -Wextra -Werror -g
 
 ##CFLAGS =-Wall -Wextra -Werror
 
@@ -23,6 +23,7 @@ SRCS = srcs/lem_in.c\
 	   srcs/parsing1.c\
 	   srcs/ft_realloc_room.c\
 	   srcs/get_option.c\
+	   srcs/bfs.c\
 
 INCS = lem_in.h
 

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 10:48:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/25 20:39:19 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,33 @@ static int		check_valid(t_farm farm)
 	return (-1);
 }
 
+static void		init_farm(t_farm *farm, int *i, char **line)
+{
+	*i = 0;
+	*line = NULL;
+	farm->init_total = 0;
+	farm->init_start = 0;
+	farm->init_end = 0;
+	farm->order = 0;
+	farm->size = SIZE;
+	farm->create_matrix = 0;
+	farm->boolean = 0;
+	farm->nb_room = 0;
+}
+
 int		main(int ac, char **av)
 {
 	t_farm	farm;
 	char	*line;
 	int		i;
-
-	i = 0;
-	line = NULL;
-	farm.init_total = 0;
-	farm.init_start = 0;
-	farm.init_end = 0;
-	farm.order = 0;
-	farm.size = SIZE;
-	farm.create_matrix = 0;
+	
+	init_farm(&farm, &i, &line);
 	if (!(farm.room = malloc(sizeof(t_room) * SIZE)))
 		return (-1);
 	if (ac > 1)
 		get_option(ac, av, farm);
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_printf("line = %s\n", line);
 		if (is_nb_info(line) == 1 && ft_atoi(line) > 0 && farm.init_total == 0)
 		{
 			farm.total = ft_atoi(line);
@@ -75,15 +81,19 @@ int		main(int ac, char **av)
 				&& farm.order == 0)
 		{
 			farm.room[i].index = i;
-			ft_printf("index == %d et test room === %s\n", i, farm.room[i].name);
 			i++;
 		}
-		else if (is_link_info(line, farm) == 1)
+		else if (!(is_room_info(line, &farm, i) == 1 && farm.init_total == 1
+				&& farm.order == 0) && is_comment1(line) != 1 && farm.boolean == 0)
+		{
+			farm.nb_room = i;
+			farm.boolean = 1;
+		}
+		else if (is_link_info(line, &farm) == 1)
 		{
 			if (farm.create_matrix == 0)
 			{
-				farm.nb_room = i;
-				if (!(farm.link = malloc(sizeof(int) * farm.nb_room)))
+				if (!(farm.link = malloc(sizeof(int*) * farm.nb_room)))
 					return (-1);
 				i = -1;
 				while (++i < farm.nb_room)
@@ -102,13 +112,13 @@ int		main(int ac, char **av)
 		}
 		ft_strdel(&line);
 	}
-	ft_printf("There is a link between room %s and room %s , as matrix = %d\n", farm.room[0].name, farm.room[1].name, farm.link[farm.room[0].index][farm.room[1].index]);
 	if (check_valid(farm) == -1)
 		return (invalid_farm(NULL));
-	free_farm(farm);
-	// bfs algo
+	if (bfs(&farm) == -1)
+		return (invalid_farm(NULL));
 	// moving and printing algo
 	//system("leaks lem_in"); // to delete
+	free_farm(farm);
 	ft_printf("This is a valid farm, well done pal!\n"); // testing // to delete
 	return (0);
 }
