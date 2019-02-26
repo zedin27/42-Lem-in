@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 20:41:29 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:26:55 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		dequeue(int **queue, t_farm *farm)
 {
 	int delete_item;
 
-	if(farm->first == -1 || farm->first > farm->last)
+	if (farm->first == -1 || farm->first > farm->last)
 	{
 		ft_printf("Queue Underflow\n");
 		exit(1);
@@ -76,23 +76,34 @@ int		bfs(t_farm *farm)
 	while (farm->room[i].end == 0)
 		i++;
 	end = i;
+	ft_printf("the end_room is %s\n", farm->room[end].name);
 	while (!is_empty(farm))
 	{
 		vertex = dequeue(&queue, farm);
 		ft_printf("Room visited = %s\n", farm->room[vertex].name);
 		put_vertex_visited(vertex, farm);
-		i = -1;
-		while (++i < farm->nb_room)
+		i = 0;
+		while (i < farm->nb_room)
+		{
+			//ft_printf("Between %s and %s, the link is: %d\n", farm->room[vertex].name, farm->room[i].name, farm->link[vertex][i]);
 			if (farm->link[vertex][i] == 1 && farm->room[i].visited == 0)
 			{
 				enqueue(i, &queue, farm);
 				if (i == end)
-				{
+				  {
+					ft_printf("Room visited = %s\n", farm->room[end].name);
 					ft_printf("Path found !!\n");
 					return (1);
-				}
+				  }
 			}
+			i++;
+		}
+		/*ft_printf("QUEUE == "); //print_queue
+		i = -1;
+		while (++i <= farm->last)
+			ft_printf("%d ", queue[i]);
+		ft_printf("\n");*/
 	}
 	free(queue);
-	return (-1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 20:39:19 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:32:04 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 	farm->order = 0;
 	farm->size = SIZE;
 	farm->create_matrix = 0;
-	farm->boolean = 0;
 	farm->nb_room = 0;
 }
 
@@ -64,7 +63,7 @@ int		main(int ac, char **av)
 	t_farm	farm;
 	char	*line;
 	int		i;
-	
+
 	init_farm(&farm, &i, &line);
 	if (!(farm.room = malloc(sizeof(t_room) * SIZE)))
 		return (-1);
@@ -82,15 +81,11 @@ int		main(int ac, char **av)
 		{
 			farm.room[i].index = i;
 			i++;
-		}
-		else if (!(is_room_info(line, &farm, i) == 1 && farm.init_total == 1
-				&& farm.order == 0) && is_comment1(line) != 1 && farm.boolean == 0)
-		{
-			farm.nb_room = i;
-			farm.boolean = 1;
+			farm.nb_room++;
 		}
 		else if (is_link_info(line, &farm) == 1)
 		{
+			ft_printf("line == %s\n", line);
 			if (farm.create_matrix == 0)
 			{
 				if (!(farm.link = malloc(sizeof(int*) * farm.nb_room)))
@@ -99,10 +94,10 @@ int		main(int ac, char **av)
 				while (++i < farm.nb_room)
 					if (!(farm.link[i] = malloc(sizeof(int) * farm.nb_room)))
 						return (-1);
-				fill_the_matrix(farm);
+				fill_the_matrix(&farm);
 				farm.create_matrix = 1;
 			}
-			create_matrix(farm, line);
+			create_link_matrix(&farm, line);
 			farm.order = 1;
 		}
 		else if (is_comment(line, &farm) != 1)

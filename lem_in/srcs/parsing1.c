@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:54:59 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 20:39:44 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/25 22:19:51 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,25 @@ int				is_link_info(char *str, t_farm *farm)
 	return (0);
 }
 
-void			fill_the_matrix(t_farm farm)
+void			fill_the_matrix(t_farm *farm)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < farm.nb_room)
+	while (i < farm->nb_room)
 	{
 		j = 0;
-		while (j < farm.nb_room)
+		while (j < farm->nb_room)
 		{
-			farm.link[i][j] = 0;
+			farm->link[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
 }
 
-int				create_matrix(t_farm farm, char *line)
+int				create_link_matrix(t_farm *farm, char *line)
 {
 	int		i;
 	int		j;
@@ -83,15 +83,15 @@ int				create_matrix(t_farm farm, char *line)
 
 	tab = ft_strsplit(line, '-');
 	k = 0;
-	while (k < farm.nb_room && ft_strcmp(farm.room[k].name, tab[0]) != 0)
+	while (k < farm->nb_room && ft_strcmp(farm->room[k].name, tab[0]) != 0)
 		k++;
-	i = farm.room[k].index;
+	i = farm->room[k].index;
 	k = 0;
-	while (k < farm.nb_room && ft_strcmp(farm.room[k].name, tab[1]) != 0)
+	while (k < farm->nb_room && ft_strcmp(farm->room[k].name, tab[1]) != 0)
 		k++;
-	j = farm.room[k].index;
-	farm.link[i][j] = 1;
-	farm.link[j][i] = 1;
+	j = farm->room[k].index;
+	farm->link[i][j] = 1;
+	farm->link[j][i] = 1;
 	k = -1;
 	while (tab[++k] != NULL)
 		free(tab[k]);
