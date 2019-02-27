@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/25 20:31:54 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/26 19:59:28 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = lem_in
 
 NAMELIB = ./libft/libftprintf.a
 
-CC = @gcc -fsanitize=address -Wall -Wextra -Werror -g
+CC = @gcc -Wall -Wextra -Werror -g
 
 ##CFLAGS =-Wall -Wextra -Werror
 
@@ -24,6 +24,9 @@ SRCS = srcs/lem_in.c\
 	   srcs/ft_realloc_room.c\
 	   srcs/get_option.c\
 	   srcs/bfs.c\
+	   srcs/queue_function.c\
+	   srcs/ant_function.c\
+
 
 INCS = lem_in.h
 
@@ -55,5 +58,10 @@ fclean : clean
 	@echo "\033[31m$(NAME) deleted ✕\033[0m"
 
 re : fclean all
+
+git:
+	git add *
+	git commit -m "$(m)"
+	git push
 
 .PHONY : all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 22:32:04 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/26 10:40:58 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 	farm->size = SIZE;
 	farm->create_matrix = 0;
 	farm->nb_room = 0;
+	farm->nb_path = 0;
 }
 
 int		main(int ac, char **av)
@@ -111,7 +112,7 @@ int		main(int ac, char **av)
 		return (invalid_farm(NULL));
 	if (bfs(&farm) == -1)
 		return (invalid_farm(NULL));
-	// moving and printing algo
+	// moving and max flow algo and display function
 	//system("leaks lem_in"); // to delete
 	free_farm(farm);
 	ft_printf("This is a valid farm, well done pal!\n"); // testing // to delete

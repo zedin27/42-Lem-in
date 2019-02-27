@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 22:26:26 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/26 19:24:15 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,18 @@ typedef struct		s_room
 	int		visited;
 }					t_room;
 
+typedef struct		s_path
+{
+	char	**array;
+	int		weight;
+	int		index;
+}					t_path;
+
 typedef struct		s_farm
 {
 	t_room	*room;
+	t_path	*path;
+	int		nb_path;
 	int		**link;
 	int		total;
 	int		nb_room;
@@ -74,9 +83,18 @@ void				get_option(int ac, char **av, t_farm farm);
 */
 
 int					bfs(t_farm *farm);
+void				enqueue(int vertex, int **queue, t_farm *farm);
+int					dequeue(int **queue, t_farm *farm);
+int					is_empty(t_farm *farm);
+void				put_vertex_visited(int ind, t_farm *farm);
+int					check_enqueue(int *queue, int i, t_farm *farm);
 
 /*
-** Functions to move the ants and to check the room and the link
+** Functions to move the ants, to check the room and to display
 */
+
+int					move_ant(t_room *src, t_room *dst);
+int					check_room_free(t_room *room);
+int					graph_finished(t_farm *farm);
 
 #endif 

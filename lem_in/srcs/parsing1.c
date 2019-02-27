@@ -6,13 +6,13 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:54:59 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/25 22:19:51 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/26 15:24:52 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		check_name(char *name, t_farm *farm, int nb)
+int				check_name(char *name, t_farm *farm, int nb)
 {
 	int		i;
 
@@ -40,16 +40,15 @@ int				is_link_info(char *str, t_farm *farm)
 		free(tab);
 		return (-1);
 	}
+	j = -1;
 	if (check_name(tab[0], farm, farm->nb_room) == 1
 			&& check_name(tab[1], farm, farm->nb_room) == 1)
 	{
-		j = -1;
 		while (tab[++j] != NULL)
 			free(tab[j]);
 		free(tab);
 		return (1);
 	}
-	j = -1;
 	while (tab[++j] != NULL)
 		free(tab[j]);
 	free(tab);
@@ -91,7 +90,7 @@ int				create_link_matrix(t_farm *farm, char *line)
 		k++;
 	j = farm->room[k].index;
 	farm->link[i][j] = 1;
-	farm->link[j][i] = 1;
+	//farm->link[j][i] = 1;
 	k = -1;
 	while (tab[++k] != NULL)
 		free(tab[k]);
