@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/26 20:01:16 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/26 20:03:06 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ re : fclean all
 
 git:
 	git add *
-	git commit
+	git commit -m "$(m)"
 	git push
 
 .PHONY : all clean fclean re
