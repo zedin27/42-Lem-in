@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/26 19:15:31 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/26 20:01:39 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void		print_queue(int *queue, t_farm *farm)
 		ft_printf("\n");
 }
 
-static void		print_shortest(int *path, t_farm *farm)
+/*static void		print_shortest(int *path, t_farm *farm)
 {
 
-}
+}*/
 
 int		bfs(t_farm *farm)
 {
@@ -65,7 +65,7 @@ int		bfs(t_farm *farm)
 				if (i == end)
 				{
 					ft_printf("Room %s visited!\n", farm->room[end].name);
-					print_shortest(queue, farm);
+					//print_shortest(queue, farm);
 					return (1);
 				}
 			}
