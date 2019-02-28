@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 13:11:29 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:39:14 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static int		invalid_farm(char *line)
 {
+	//free_farm(farm);
 	ft_printf("line error = %s\n", line); // to delete
 	ft_printf("The farm is not valid!\n");
 	if (line != NULL)
@@ -23,27 +24,33 @@ static int		invalid_farm(char *line)
 	return (-1);
 }
 
-static void		free_farm(t_farm farm)
+static void		free_farm(t_farm *farm)
 {
 	int i;
 
 	i = 0;
-	while (i < farm.nb_room)
+	while (i < farm->nb_room)
 	{
-		free(farm.room[i].name);
-		free(farm.link[i]);
+		free(farm->room[i].name);
+		free(farm->link[i]);
 		i++;
 	}
-	free(farm.link);
-	free(farm.room);
+	i = 0;
+	while (i < farm->nb_path)
+	{
+		free(farm->path[i].path);
+		i++;
+	}
+	free(farm->path);
+	free(farm->link);
+	free(farm->room);
 }
 
 static int		check_valid(t_farm farm)
 {
 	if (farm.init_start == 2 && farm.init_end == 2)
 		return (1);
-	ft_printf("start = %d et end = %d\n", farm.init_start, farm.init_end);
-	free_farm(farm);
+	free_farm(&farm);
 	return (-1);
 }
 
@@ -102,7 +109,8 @@ int		main(int ac, char **av)
 				fill_the_matrix(&farm);
 				farm.create_matrix = 1;
 			}
-			create_link_matrix(&farm, line);
+			if (create_link_matrix(&farm, line) == -1)
+				return (invalid_farm(NULL));
 		}
 		else if (is_comment(line, &farm) != 1)
 			return (invalid_farm(line));
@@ -124,9 +132,8 @@ int		main(int ac, char **av)
 		farm.nb_path++;
 	if (farm.nb_path == 0)
 		return (invalid_farm(NULL));
-	// moving and max flow algo and display function
+	//moving and max flow algo and display function
 	//system("leaks lem_in"); // to delete
-	free_farm(farm);
-	ft_printf("This is a valid farm, well done pal!\n"); // testing // to delete
+	free_farm(&farm);
 	return (0);
 }

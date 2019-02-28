@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 13:10:55 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 14:11:04 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ typedef struct		s_farm
 
 int					is_nb_info(char *str);
 int					is_room_info(char *str, t_farm *farm, int i);
+int					check_coor(int x, int y, t_farm *farm, int nb);
 int					ft_realloc_room(t_farm farm, int old_nb_room);
 int					is_link_info(char *str, t_farm *farm);
 int					create_link_matrix(t_farm *farm, char *line);
 void				fill_the_matrix(t_farm *farm);
 int					is_comment(char *str, t_farm *farm);
-int					is_comment1(char *str);
 void				free_tab(char **tab);
 int					check_name(char *name, t_farm *farm, int nb);
 void				get_option(int ac, char **av, t_farm farm);

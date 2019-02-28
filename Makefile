@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/28 13:14:35 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/28 14:07:42 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ CC = @gcc -Wall -Wextra -Werror -g
 SRCS = srcs/lem_in.c\
 	   srcs/parsing0.c\
 	   srcs/parsing1.c\
+	   srcs/parsing_checker.c\
 	   srcs/ft_realloc_room.c\
 	   srcs/get_option.c\
 	   srcs/bfs.c\
