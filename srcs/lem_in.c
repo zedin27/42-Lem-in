@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 11:33:32 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:11:29 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static int		invalid_farm(char *line)
 {
+	ft_printf("line error = %s\n", line); // to delete
 	ft_printf("The farm is not valid!\n");
 	if (line != NULL)
 		ft_strdel(&line);
@@ -39,9 +40,9 @@ static void		free_farm(t_farm farm)
 
 static int		check_valid(t_farm farm)
 {
-	//ft_printf("start = %d et end = %d\n", farm.init_start, farm.init_end);
 	if (farm.init_start == 2 && farm.init_end == 2)
 		return (1);
+	ft_printf("start = %d et end = %d\n", farm.init_start, farm.init_end);
 	free_farm(farm);
 	return (-1);
 }
@@ -50,12 +51,15 @@ static void		init_farm(t_farm *farm, int *i, char **line)
 {
 	*i = 0;
 	*line = NULL;
+	farm->room = NULL;
+	farm->path = NULL;
 	farm->init_total = 0;
 	farm->init_start = 0;
 	farm->init_end = 0;
 	farm->size = SIZE;
 	farm->create_matrix = 0;
 	farm->nb_room = 0;
+	farm->nb_path = 0;
 	farm->count = 0;
 }
 
@@ -64,6 +68,7 @@ int		main(int ac, char **av)
 	t_farm	farm;
 	char	*line;
 	int		i;
+	int		j;
 
 	init_farm(&farm, &i, &line);
 	if (!(farm.room = malloc(sizeof(t_room) * SIZE)))
@@ -100,23 +105,25 @@ int		main(int ac, char **av)
 			create_link_matrix(&farm, line);
 		}
 		else if (is_comment(line, &farm) != 1)
-		{
-			ft_printf("line error = %s\n", line);
 			return (invalid_farm(line));
-		}
 		ft_strdel(&line);
 	}
 	if (check_valid(farm) == -1)
-	{
-		ft_printf("test");
 		return (invalid_farm(NULL));
-	}
 	ft_printf("\n");
-	farm.init_total = 0;
+	while (farm.room[farm.count].start != 1)
+		farm.count++;
+	i = -1;
+	j = 0;
+	while (++i < farm.nb_room)
+		if (farm.link[farm.count][i] == 1)
+			j++;
+	if (!(farm.path = malloc(sizeof(t_path) * j)))
+		return (-1);
 	while (bfs(&farm) == 1)
-		i++;
-	farm.init_total = i;
-		//return (invalid_farm(NULL));
+		farm.nb_path++;
+	if (farm.nb_path == 0)
+		return (invalid_farm(NULL));
 	// moving and max flow algo and display function
 	//system("leaks lem_in"); // to delete
 	free_farm(farm);

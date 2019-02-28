@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 11:32:54 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:11:50 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,13 @@ int		bfs(t_farm *farm)
 				{
 					//ft_printf("Room visited is %s and weight = %d\n", farm->room[end].name, farm->room[vertex].weight + 1);
 					farm->room[end].weight = farm->room[vertex].weight + 1;
-					if (!(path = ft_memalloc(sizeof(int*) * (farm->room[end].weight))))
+					if (!(path = ft_memalloc(sizeof(int*) * (farm->room[end].weight)))) //remplace path directly by farm->
 						return (-1);
 					create_path(&path, queue, farm, farm->room[end].weight);
-					farm->s_path = path; // to free
+					farm->path[farm->nb_path].path = path; // to free
+					farm->path[farm->nb_path].weight = farm->room[end].weight;
 					ft_printf("Weight is %d and path is: ", farm->room[end].weight);
-					print_path(farm->s_path, farm->room[end].weight);
+					print_path(farm->path[farm->nb_path].path, farm->room[end].weight);
 					//print_queue(queue, farm);
 					free(queue);
 					return (1);

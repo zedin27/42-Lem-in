@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:52:28 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 11:29:03 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 12:11:20 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				is_room_info(char *str, t_farm *farm, int i)
 		farm->room[i].ant = 0;
 		farm->room[i].visited = 0;
 		farm->room[i].weight = 0;
-		if ((*farm).init_start == 1)
+		if (farm->init_start == 1)
 		{
 			farm->room[i].start = 1;
 			farm->room[i].ant = farm->total;

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 11:26:38 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:10:55 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,20 @@ typedef struct		s_room
 	int		weight;
 }					t_room;
 
-/*typedef struct		s_path
+typedef struct		s_path
 {
-	char	**array;
+	int		*path;
 	int		weight;
-	int		index;
-}					t_path;*/
+}					t_path;
 
 typedef struct		s_farm
 {
 	t_room	*room;
-	int		*s_path;
+	t_path	*path;
 	int		**link;
 	int		total;
 	int		nb_room;
-	int		path;
+	int		nb_path;
 	int		init_start;
 	int		init_end;
 	int		init_total;
