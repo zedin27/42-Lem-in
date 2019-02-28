@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/26 20:03:06 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/28 13:14:35 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ fclean : clean
 
 re : fclean all
 
-git:
+git: fclean
 	git add *
 	git commit -m "$(m)"
 	git push

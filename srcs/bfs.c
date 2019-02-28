@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 13:11:50 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 13:14:10 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int		bfs(t_farm *farm)
 	farm->last = -1;
 	if (!(queue = ft_memalloc(sizeof(int*) * farm->nb_room)))
 		return (-1);
-	if (!(path = ft_memalloc(sizeof(int*) * farm->nb_room)))
-		return (-1);
 	i = 0;
 	while (farm->room[i].start == 0)
 		i++;
@@ -119,8 +117,8 @@ int		bfs(t_farm *farm)
 					farm->path[farm->nb_path].weight = farm->room[end].weight;
 					ft_printf("Weight is %d and path is: ", farm->room[end].weight);
 					print_path(farm->path[farm->nb_path].path, farm->room[end].weight);
-					//print_queue(queue, farm);
 					free(queue);
+					//free(path);
 					return (1);
 				}
 			}
@@ -128,6 +126,5 @@ int		bfs(t_farm *farm)
 		}
 	}
 	free(queue);
-	//free(path); think about freeing the path
 	return (0);
 }
