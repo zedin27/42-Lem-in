@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/28 14:07:42 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/28 15:43:35 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME = lem_in
 
 NAMELIB = ./libft/libftprintf.a
 
-CC = @gcc -Wall -Wextra -Werror -g
+CC = @gcc
 
-##CFLAGS =-Wall -Wextra -Werror
+CFLAGS =-Wall -Wextra -Werror -g
 
 SRCS = srcs/lem_in.c\
 	   srcs/parsing0.c\
@@ -27,6 +27,7 @@ SRCS = srcs/lem_in.c\
 	   srcs/bfs.c\
 	   srcs/queue_function.c\
 	   srcs/ant_function.c\
+	   srcs/free_functions.c\
 
 
 INCS = lem_in.h

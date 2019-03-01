@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 22:31:09 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 14:11:04 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 16:03:41 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct		s_farm
 	int		first;
 	int		last;
 	int		count;
+	int		path_max;
 }					t_farm;
-
 
 /*
 ** Functions to get the informations from the stdinput
@@ -77,6 +77,11 @@ int					is_comment(char *str, t_farm *farm);
 void				free_tab(char **tab);
 int					check_name(char *name, t_farm *farm, int nb);
 void				get_option(int ac, char **av, t_farm farm);
+int					check_valid_start_end(t_farm farm);
+void				free_farm(t_farm *farm);
+void				free_tab(char **tab);
+int					invalid_farm(char *line, t_farm *farm);
+int					valid_farm(t_farm *farm);
 
 /*
 ** Algorithms to find the shortests paths and manage the flow
@@ -97,4 +102,4 @@ int					move_ant(t_room *src, t_room *dst);
 int					check_room_free(t_room *room);
 int					graph_finished(t_farm *farm);
 
-#endif 
+#endif

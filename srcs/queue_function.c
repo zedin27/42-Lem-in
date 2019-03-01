@@ -6,13 +6,13 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 16:48:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/26 18:21:13 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 15:15:17 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		enqueue(int vertex, int **queue, t_farm *farm)
+void	enqueue(int vertex, int **queue, t_farm *farm)
 {
 	if (farm->last == farm->nb_room - 1)
 		ft_printf("Queue Overflow\n");
@@ -47,7 +47,7 @@ int		is_empty(t_farm *farm)
 		return (0);
 }
 
-void		put_vertex_visited(int ind, t_farm *farm)
+void	put_vertex_visited(int ind, t_farm *farm)
 {
 	int i;
 
@@ -70,4 +70,3 @@ int		check_enqueue(int *queue, int i, t_farm *farm)
 	}
 	return (1);
 }
-

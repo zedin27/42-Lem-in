@@ -6,13 +6,13 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 19:15:38 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/26 19:31:05 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 15:16:05 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		move_ant(t_room *src,  t_room *dst)
+int		move_ant(t_room *src, t_room *dst)
 {
 	if (src->ant == 1 && dst->ant == 0)
 	{
