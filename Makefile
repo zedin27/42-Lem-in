@@ -3,68 +3,67 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+         #
+#    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/20 17:44:49 by ztisnes           #+#    #+#              #
-#    Updated: 2019/02/21 17:42:39 by ztisnes          ###   ########.fr        #
+#    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
+#    Updated: 2019/03/01 15:13:06 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-################################################################################
-# COLORS                                                                       #
-################################################################################
+NAME = lem_in
 
-RES = \033[0m
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-LCYAN = \033[1;36m
-CYAN = \033[1;34m
-PURPLE = \033[0;35m
+NAMELIB = ./libft/libftprintf.a
 
-################################################################################
-# INITIAL FORMAT OR COMPILATION                                                #
-################################################################################
+CC = @gcc
 
-CC			= gcc
-FLAGS		= -Ofast -Wextra -Wall -Werror
-LIB			= libft.a
-NAME		= lem-in
-LINK		= -L libft/ -l ft
-INC			= -I inc/ -I libft/libft.h
-SRCFILES	= $(wildcard *.c)
-SRCDIR		= src/
-OBJS		= $(patsubst %, %.o, $(addprefix $(SRCDIR), $(SRCFILES)))
+CFLAGS =-Wall -Wextra -Werror -g
 
-SRCFILES	= bfs
+SRCS = srcs/lem_in.c\
+	   srcs/parsing0.c\
+	   srcs/parsing1.c\
+	   srcs/parsing_checker.c\
+	   srcs/ft_realloc_room.c\
+	   srcs/get_option.c\
+	   srcs/bfs.c\
+	   srcs/queue_function.c\
+	   srcs/ant_function.c\
+	   srcs/free_functions.c\
 
-################################################################################
-# RULES                                                                        #
-################################################################################
 
-all: $(LIB) $(NAME)
-	@ echo " $(GREEN) Completed $(RES)"
+INCS = lem_in.h
 
-$(LIB):
-	make -C libft/
+LIBDIR = ./libft/
+INCDIR = ./includes/
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(INC) $(OBJS) $(LINK) -o $(NAME)
+OBJ = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
-%.o: %.c
-	$(CC) $(FLAGS) $(INC) -c $< -o $@
+all : $(NAME)
 
-clean:
-	/bin/rm -f src/*.o
-	/bin/rm -f $(OBJSRC)
-	make clean -C libft/
+$(NAME) : $(OBJ)
+		@echo "\033[33mCompiling...\033[0m"
+		@make -C $(LIBDIR)
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NAMELIB)
+		@echo "\033[32m$(NAME) compiled ✔ ✔ ✔ ✔\033[0m"
 
-fclean: clean
-	/bin/rm -f $(NAME)
-	/bin/rm -f libft/$(LIB)
-	@ echo "👺🖕$(RED) ALL Binaries gone!$(RES) 👺🖕"
+objs/%.o : srcs/%.c
+	@mkdir -p $(@D)
+	@$(CC) -c $(CFLAGS) $< -I./includes -o $@
 
-re: fclean all
-	@ echo "$(GREEN)♻️ Program remade completed ♻️$(RES)"
+clean :
+		@rm -rf $(OBJ) objs
+		@make -C $(LIBDIR) clean
+		@echo "\033[31mObjects deleted ✕\033[0m"
 
-.PHONY: all clean fclean
+fclean : clean
+	@rm -f $(NAME)
+	@make -C $(LIBDIR) fclean
+	@echo "\033[31m$(NAME) deleted ✕\033[0m"
+
+re : fclean all
+
+git: fclean
+	git add *
+	git commit -m "$(m)"
+	git push
+
+.PHONY : all clean fclean re
