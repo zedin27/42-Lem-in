@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 12:51:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 16:43:33 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/28 16:56:50 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ int				bfs(t_farm *farm)
 		prepare_loop(farm, &queue, &vertex, &i);
 		while (++i < farm->nb_room)
 		{
-			//ft_printf("Link is %d between %s et %s\n", farm->link[vertex][i], farm->room[i].name, farm->room[vertex].name);
 			if (farm->link[vertex][i] == 1 && farm->room[i].visited == 0)
 			{
 				if (check_enqueue(queue, i, farm) == 1)
