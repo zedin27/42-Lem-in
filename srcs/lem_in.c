@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 13:09:26 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/28 15:59:21 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/03/01 11:05:04 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				main(int ac, char **av)
 		farm.nb_path++;
 	if (farm.nb_path == 0)
 		return (invalid_farm(NULL, &farm));
-	//moving and max flow algo and display function
+	//moving_ant(&farm); //moving ants and display function
 	//system("leaks lem_in"); // to delete
 	return (valid_farm(&farm));
 }
