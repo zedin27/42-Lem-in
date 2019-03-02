@@ -1,3 +1,3 @@
-[submodule "copy_libft/libft"]
-	path = copy_libft/libft
+[submodule "copy1_libft/libft"]
+	path = copy1_libft/libft
 	url = https://github.com/zedin27/42_libft
